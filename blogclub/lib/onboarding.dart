@@ -1,5 +1,6 @@
 import 'package:blogclub/data.dart';
 import 'package:blogclub/gen/assets.gen.dart';
+import 'package:blogclub/home.dart';
 import 'package:blogclub/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -110,7 +111,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                               Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                           AuthScreen()));
+                                          HomeScreen()));
                             } else {
                               _pageController.animateToPage(page + 1,
                                   duration: const Duration(milliseconds: 500),

@@ -1,9 +1,11 @@
 // ignore_for_file: unused_import
+import 'package:blogclub/article.dart';
 import 'package:blogclub/gen/fonts.gen.dart';
 import 'package:blogclub/home.dart';
 import 'package:blogclub/splash.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 void main() {
   // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
   //     statusBarColor: Colors.white,
@@ -39,6 +41,7 @@ class MyApp extends StatelessWidget {
             background: Color(0xffFBFCFF),
             surface: Colors.white,
             onBackground: primaryTextColor),
+        snackBarTheme: const SnackBarThemeData(backgroundColor: primaryColor),
         textTheme: const TextTheme(
             subtitle1: TextStyle(
                 fontFamily: FontFamily.avenir,
@@ -73,7 +76,8 @@ class MyApp extends StatelessWidget {
             bodyText2: TextStyle(
                 fontFamily: FontFamily.avenir,
                 color: secondaryTextColor,
-                fontSize: 12)),
+                fontSize: 12,
+                fontWeight: FontWeight.w500)),
       ),
       // home: Stack(
       //   children: [
@@ -81,7 +85,7 @@ class MyApp extends StatelessWidget {
       //     Positioned(bottom: 0, right: 0, left: 0, child: _BottomNavigation())
       //   ],
       // ),
-      home: const SplashScreen(),
+      home: const ArticleScreen(),
     );
   }
 }

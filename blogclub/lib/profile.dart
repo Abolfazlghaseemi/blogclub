@@ -10,18 +10,17 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     final posts = AppDatabase.posts;
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         backgroundColor: themeData.colorScheme.background.withOpacity(0),
-        title: Text('Profile'),
+        title: const Text('Profile'),
         actions: [
           IconButton(
-            icon: Icon(Icons.more_horiz_rounded),
+            icon: const Icon(Icons.more_horiz_rounded),
             onPressed: () {},
           ),
-          SizedBox(
+          const SizedBox(
             width: 16,
           ),
         ],
@@ -31,7 +30,7 @@ class ProfileScreen extends StatelessWidget {
           Stack(
             children: [
               Container(
-                margin: EdgeInsets.fromLTRB(32, 0, 32, 32),
+                margin: const EdgeInsets.fromLTRB(32, 0, 32, 32),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     color: themeData.colorScheme.surface,
@@ -53,14 +52,14 @@ class ProfileScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(12),
                                 child: Assets.img.stories.story9
                                     .image(width: 84, height: 84)),
-                            SizedBox(
+                            const SizedBox(
                               width: 16,
                             ),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('@jovieden'),
+                                  const Text('@jovieden'),
                                   Text(
                                     'Jovi Daniel',
                                     style: Theme.of(context)
@@ -102,7 +101,7 @@ class ProfileScreen extends StatelessWidget {
                               .copyWith(fontWeight: FontWeight.w300),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 24,
                       ),
                     ]),
@@ -135,7 +134,7 @@ class ProfileScreen extends StatelessWidget {
                         flex: 1,
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Color(0xff2151CD),
+                            color: const Color(0xff2151CD),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Column(
@@ -148,7 +147,7 @@ class ProfileScreen extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                     color: themeData.colorScheme.onPrimary),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 8,
                               ),
                               Text(
@@ -176,7 +175,7 @@ class ProfileScreen extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   color: themeData.colorScheme.onPrimary),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 8,
                             ),
                             Text(
@@ -203,7 +202,7 @@ class ProfileScreen extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   color: themeData.colorScheme.onPrimary),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 8,
                             ),
                             Text(
@@ -227,7 +226,7 @@ class ProfileScreen extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surface,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(32),
                 topRight: Radius.circular(32),
               ),

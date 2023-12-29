@@ -5,5 +5,4 @@
 ![6](https://github.com/Abolfazlghaseemi/blogclub/assets/85543976/59e00ab1-0a11-45d3-81ab-e2268c58dbcc)
 ![8](https://github.com/Abolfazlghaseemi/blogclub/assets/85543976/b38c2634-828c-4967-a931-c3b7d9bb6579)
 ![9](https://github.com/Abolfazlghaseemi/blogclub/assets/85543976/7f94ae5b-494b-4e53-90e1-0b6f75346512)
-![291239064-4585ab29-53b2-40ab-88b3-](https://github.com/Abolfazlghaseemi/blogclub/assets/85543976/9f35972a-bd4b-4afd-823b-fb9ed4bcac91)
 

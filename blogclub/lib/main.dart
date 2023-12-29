@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
     const primaryColor = Color(0xff376AED);
 
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         textButtonTheme: TextButtonThemeData(

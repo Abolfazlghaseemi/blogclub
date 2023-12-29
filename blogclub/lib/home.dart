@@ -1,7 +1,9 @@
 import 'package:blogclub/carousel/carousel_options.dart';
 import 'package:blogclub/carousel/carousel_slider.dart';
 import 'package:blogclub/data.dart';
+import 'package:blogclub/gen/assets.gen.dart';
 import 'package:blogclub/gen/fonts.gen.dart';
+import 'package:blogclub/main.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -28,11 +31,7 @@ class HomeScreen extends StatelessWidget {
                       'Hi, Jonathan!',
                       style: themeData.textTheme.subtitle1,
                     ),
-                    Image.asset(
-                      'assets/img/icons/notification.png',
-                      width: 32,
-                      height: 32,
-                    ),
+                    Assets.img.icons.notification.image(width: 32, height: 32),
                   ],
                 ),
               ),
@@ -48,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                 height: 16,
               ),
               const _CategoryList(),
-              const _postList(),
+              const _PostList(),
               const SizedBox(
                 height: 32,
               ),
@@ -257,7 +256,10 @@ class _Story extends StatelessWidget {
         strokeWidth: 2,
         radius: const Radius.circular(24),
         color: const Color(0xff7B8BB2),
-        dashPattern: const [8, 3],
+        dashPattern: const [
+          8,
+          3,
+        ],
         padding: const EdgeInsets.all(7),
         child: Container(
           decoration: BoxDecoration(
@@ -277,43 +279,41 @@ class _Story extends StatelessWidget {
   }
 }
 
-class _postList extends StatelessWidget {
-  const _postList({
-    Key? key,
-  }) : super(key: key);
-
+class _PostList extends StatelessWidget {
+  const _PostList({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final posts = AppDatabase.posts;
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 32, right: 24),
+          padding: const EdgeInsets.only(left: 32, right: 16),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Latest News',
-                style: Theme.of(context).textTheme.headline5,
-              ),
+              Text('Latest News', style: Theme.of(context).textTheme.headline5),
               TextButton(
                 onPressed: () {},
-                child: const Text('More'),
+                child: const Text(
+                  'More',
+                  style: TextStyle(
+                    color: Color(0xff376AED),
+                  ),
+                ),
               ),
             ],
           ),
         ),
         ListView.builder(
-          itemCount: posts.length,
-          itemExtent: 141,
-          shrinkWrap: true,
-          physics: const ClampingScrollPhysics(),
-          itemBuilder: (context, index) {
-            final post = posts[index];
-            return Post(post: post);
-          },
-        )
+            itemCount: posts.length,
+            itemExtent: 141,
+            shrinkWrap: true,
+            physics: const ClampingScrollPhysics(),
+            itemBuilder: (context, index) {
+              final post = posts[index];
+              return Post(post: post);
+            })
       ],
     );
   }
@@ -321,94 +321,108 @@ class _postList extends StatelessWidget {
 
 class Post extends StatelessWidget {
   const Post({
-    super.key,
+    Key? key,
     required this.post,
-  });
+  }) : super(key: key);
 
   final PostData post;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(32, 8, 32, 8),
-      decoration: BoxDecoration(
+    return InkWell(
+      onTap: () => Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => SimpleScreen(tabName: 'Home',))),
+      child: Container(
+        margin: const EdgeInsets.fromLTRB(32, 8, 32, 8),
+        decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
           boxShadow: const [
             BoxShadow(
               blurRadius: 10,
-              color: Color(0x1a5282ff),
-            )
-          ]),
-      child: Row(children: [
-        ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: Image.asset('assets/img/posts/small/${post.imageFileName}',width: 120,)),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  post.caption,
-                  style: const TextStyle(
-                      fontFamily: FontFamily.avenir,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                      color: Color(0xff376AED)),
-                ),
-                Text(
-                  post.title,
-                  style: Theme.of(context).textTheme.subtitle1,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+              color: Color(0x1a5282FF),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.asset(
+                'assets/img/posts/small/${post.imageFileName}',
+                width: 120,
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(
-                      CupertinoIcons.hand_thumbsup,
-                      size: 20,
-                      color: Theme.of(context).textTheme.bodyText2!.color,
+                    Text(
+                      post.caption,
+                      style: const TextStyle(
+                          fontFamily: FontFamily.avenir,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 14,
+                          color: Color(0xff376AED)),
                     ),
                     const SizedBox(
-                      width: 4,
+                      height: 8,
                     ),
-                    Text(
-                      post.likes,
-                      style: Theme.of(context).textTheme.bodyText2,
-                    ),
+                    Text(post.title,
+                        style: Theme.of(context).textTheme.subtitle2),
                     const SizedBox(
-                      width: 16,
+                      height: 16,
                     ),
-                    Icon(
-                      CupertinoIcons.clock,
-                      size: 20,
-                      color: Theme.of(context).textTheme.bodyText2!.color,
-                    ),
-                    Text(
-                      post.time,
-                      style: Theme.of(context).textTheme.bodyText2,
-                    ),
-                    Expanded(
-                      child: Container(
-                        alignment: Alignment.centerRight,
-                        child: Icon(
-                          post.isBookmarked
-                              ? CupertinoIcons.bookmark_fill
-                              : CupertinoIcons.bookmark,
-                          size: 16,
-                          color: Theme.of(context).textTheme.bodyText2!.color,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Icon(CupertinoIcons.hand_thumbsup,
+                            size: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyText2!.color),
+                        const SizedBox(
+                          width: 4,
                         ),
-                      ),
-                    ),
+                        Text(post.likes,
+                            style: Theme.of(context).textTheme.bodyText2),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        Icon(CupertinoIcons.clock,
+                            size: 16,
+                            color:
+                                Theme.of(context).textTheme.bodyText2!.color),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        Text(post.time,
+                            style: Theme.of(context).textTheme.bodyText2),
+                        Expanded(
+                          child: Container(
+                            alignment: Alignment.centerRight,
+                            child: Icon(
+                                post.isBookmarked
+                                    ? CupertinoIcons.bookmark_fill
+                                    : CupertinoIcons.bookmark,
+                                size: 16,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2!
+                                    .color),
+                          ),
+                        )
+                      ],
+                    )
                   ],
                 ),
-              ],
-            ),
-          ),
-        )
-      ]),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
